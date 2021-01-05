@@ -1,0 +1,15 @@
+---
+ 
+- hosts: localhost
+  vars_files:
+    /home/ansible/aws_creds.yml
+  tasks:
+  - name: Create a S3 bucket
+    ec2_instance_facts:
+      aws_access_key: '{{ AWS_ACCESS_KEY_ID }}'
+      aws_secret_key: '{{ AWS_SECRET_ACCESS_KEY }}'
+      region: '{{ AWS_REGION }}'
+
+    amazon.aws.s3_bucket:
+      name: mys3bucket
+      state: present
