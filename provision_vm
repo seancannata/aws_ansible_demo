@@ -1,0 +1,16 @@
+- hosts: localhost
+  gather_facts: no
+  vars_files:
+    - /home/ansible/keys.yml
+  tasks:
+    - name: Deploy new EC2 Instance
+      ec2:
+        aws_access_key: "{{ AWS_ACCESS_KEY_ID }}"
+        aws_secret_key: "{{ AWS_SECRET_ACCESS_KEY }}"
+        ec2_region: us-east-2
+        instance_type: t2.micro
+        image: ami-03d64741867e7bb94
+        assign_public_ip: yes
+        vpc_subnet_id: vpc-f071db9b
+        instance_tags:
+          Name: New
